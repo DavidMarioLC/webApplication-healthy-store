@@ -1,0 +1,153 @@
+.productCard {
+  width: 256px;
+  min-width: 150px;
+  height: auto;
+  cursor: pointer;
+}
+
+.productCardImageWrapper {
+  border-radius: 16px;
+  overflow: hidden;
+  height: auto;
+  padding-bottom: 1rem;
+  display: grid;
+}
+
+.productCardImage {
+  background: none;
+  object-fit: cover;
+  vertical-align: baseline;
+  width: 100%;
+  height: 100%;
+}
+
+.productCardName {
+  color: #2d3a2f;
+  font-weight: 500;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.productCardWeight {
+  color: #5f6961;
+  font-weight: 400;
+  font-size: 0.93rem;
+  margin: 0;
+  padding-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.divisor {
+  background: rgb(222, 222, 222);
+  width: 1px;
+  height: 12px;
+  display: inline-block;
+}
+
+.productCardContent {
+  display: flex;
+  flex-direction: column;
+
+  /* gap: 0.5rem; */
+}
+
+.button {
+  height: 42px;
+  width: 100%;
+  border: 1px solid #81d28e;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #4bbe5e;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 62px;
+}
+.button:hover {
+  background-color: #f4f9f5;
+}
+
+.productCardFooter {
+  display: flex;
+  justify-content: space-between;
+
+  align-items: center;
+}
+.productCardQuantity {
+  font-weight: 600;
+  font-size: 20px;
+  color: rgb(45, 58, 47);
+  margin: 0;
+}
+
+.productCardCartActions {
+  display: flex;
+  height: 42px;
+  width: 106px;
+  border-radius: 62px;
+  overflow: hidden;
+}
+
+.productCardDecreaseButton,
+.productCardIncreaseButton {
+  border: none;
+  background-color: rgb(244, 249, 245);
+  color: rgb(75, 190, 94);
+  height: 100%;
+  width: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.productCardIncreaseButton:hover,
+.productCardDecreaseButton:hover {
+  background: rgb(240, 245, 241);
+}
+
+.productCardIncreaseButton:active,
+.productCardDecreaseButton:active {
+  transform: scale(0.96);
+}
+
+/* priceUnitAndUnits */
+
+.productCardBody {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* units buttons */
+
+.productCardWeightActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.units__btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  color: rgb(161, 181, 164);
+  background: rgb(244, 249, 245);
+  cursor: pointer;
+  /* padding: 1rem; */
+}
+
+.units__btn.active {
+  color: rgb(75, 190, 94);
+  border: 1px solid rgb(75, 190, 94);
+}

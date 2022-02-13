@@ -1,0 +1,10 @@
+.products {
+  padding: 2rem 0;
+}
+.title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 140%;
+  color: rgb(45, 58, 47);
+  margin-bottom: 6px;
+}
