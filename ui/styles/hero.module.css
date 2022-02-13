@@ -1,0 +1,57 @@
+.heroContent {
+  height: 500px;
+  background-image: url('/images/hero.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  border-radius: 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.heroGridCards {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.heroCard {
+  height: 140px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(35px);
+  padding: 1.5rem;
+
+  letter-spacing: 0.05px;
+  font-weight: bold;
+
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.heroCardText {
+  font-family: 'Patua One', cursive;
+  font-size: 24px;
+  font-weight: 400;
+}
+.positionImage {
+  position: absolute;
+  right: -10px;
+  top: 30px;
+}
+.wrapperImage {
+  width: 120px;
+  height: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .heroGridCards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .wrapperImage {
+    width: 130px;
+  }
+}

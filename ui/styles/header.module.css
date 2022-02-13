@@ -1,0 +1,86 @@
+.header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 2;
+}
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.ubicationAndCard {
+  display: flex;
+  gap: 1rem;
+}
+
+.ubication {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  border-radius: 42px;
+  border: none;
+  padding: 0 1rem;
+  cursor: pointer;
+  background-color: rgba(230, 228, 228, 0.311);
+}
+.ubication:hover {
+  background-color: rgba(230, 228, 228, 0.612);
+}
+
+.ubicationIcon {
+  font-size: 20px;
+  color: rgb(75, 190, 94);
+}
+
+.ubicationText {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .ubicationText {
+    display: block;
+  }
+}
+
+.cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  border-radius: 42px;
+  padding: 0 1rem;
+  background: rgb(75, 190, 94);
+  cursor: pointer;
+}
+
+.cart:hover {
+  background: rgb(69, 176, 87);
+}
+
+.divider {
+  width: 1px;
+  height: 32px;
+  margin-left: 12px;
+  margin-right: 12px;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.amount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: white;
+}
+.amountIcon {
+  font-size: 20px;
+}
+
+.price {
+  color: white;
+}
