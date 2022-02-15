@@ -1,22 +1,32 @@
 import type { GetStaticProps } from 'next';
 import Head from 'next/head';
-import { Header, Hero, StoreLayout } from '../ui';
+import { Header, Hero, StoreLayout } from '../ui/layout';
 import OffertsProducts from '../product/screens/OffertsProducts';
 import PopularProducts from '../product/screens/PopularProducts';
 import { Product } from '../product/types';
 import { useEffect } from 'react';
 import { useStore } from '../context/storeContext';
+import { useApp } from '../context/appContext';
+import { ModalProduct, ModalCart } from '../ui/modals';
+
 type Props = {
   products: Product[];
 };
 
 const Home = ({ products }: Props) => {
   const { setProducts } = useStore();
-
+  const {
+    visibleModalProduct,
+    visibleModalCart,
+    changeVisibilityModalProduct,
+    changeVisibilityModalCart,
+    productSelected,
+  } = useApp();
   useEffect(() => {
     setProducts(products);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <>
       <Head>
@@ -32,6 +42,15 @@ const Home = ({ products }: Props) => {
           <PopularProducts />
         </StoreLayout>
       </main>
+      <ModalProduct
+        visible={visibleModalProduct}
+        changeVisibility={changeVisibilityModalProduct}
+        product={productSelected}
+      />
+      <ModalCart
+        visible={visibleModalCart}
+        changeVisibility={changeVisibilityModalCart}
+      />
     </>
   );
 };
