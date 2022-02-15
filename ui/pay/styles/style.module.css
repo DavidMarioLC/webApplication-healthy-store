@@ -1,12 +1,80 @@
-.form {
+.header {
   padding: 1rem;
+  border-bottom: 1px solid rgb(233, 233, 233);
+}
+.headerButton {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  background: none;
+  cursor: pointer;
+}
+
+.headerButtonIcon {
+  transition: 250ms linear;
+}
+
+.headerButton:hover > .headerButtonIcon {
+  transform: translateX(-10px);
+}
+
+.wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+}
+/* aside */
+.aside {
+  padding: 0 1rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.listProductScroll {
+  overflow-y: auto;
+  height: 400px;
+  flex-grow: 1;
+}
+
+.listProducts {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-right: 2rem;
+}
+
+.asideFooter {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgb(233, 233, 233);
+  padding: 1rem 0;
+  font-weight: bold;
+  font-size: 1.2rem;
+
+  color: rgb(45, 58, 47);
+}
+
+/* main */
+
+.main {
+  padding: 1rem;
+}
+
+.checkbox {
+  accent-color: limegreen;
+}
+
+.asideTitle {
+  margin: 0;
+  padding: 2rem 0;
+  color: rgb(45, 58, 47);
 }
 
 .title {
   font-weight: 500;
   color: hsl(0, 0%, 20%);
   margin: 0;
-  padding: 1.5rem 0;
+  padding: 1rem 0;
 }
 
 .formField {
@@ -93,4 +161,70 @@
   padding-bottom: 1.75em;
   color: #fff;
   font-weight: 700;
+}
+
+.emptyCart {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 800px) {
+  .pay {
+    display: flex;
+  }
+
+  .main {
+    flex: 1;
+  }
+
+  /* auxiliar */
+  .column_flex {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .column_flex > * {
+    flex: 1;
+  }
+}
+
+/* modal local */
+.overlay {
+  z-index: 99;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.24);
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.modal {
+  width: 500px;
+  height: 360px;
+  border-radius: 16px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  text-align: center;
+  color: rgb(45, 58, 47);
+}
+
+.modalButton {
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #4bbe5e;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: #4bbe5e;
+}
+
+.modalButton:active {
+  transform: scale(0.96);
 }
