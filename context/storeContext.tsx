@@ -6,21 +6,30 @@ import {
   useContext,
   useState,
 } from 'react';
-import { Product, ProductCart } from '../product/types';
+import { Product, IProductCart } from '../product/types';
 import { totalPriceByProduct } from '../utils/product';
 
 type Store = {
   productsOfferts: Product[];
   productsPopular: Product[];
+  productsCart: IProductCart[];
   setProducts: Dispatch<SetStateAction<Product[]>>;
-  increaseCart: (product: Product) => void;
-  decreaseCart: (product: Product) => void;
+  increaseCart: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    product: Product
+  ) => void;
+  decreaseCart: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    product: Product
+  ) => void;
   isInTheCart: (id: string) => any;
   changeWeightToUnits: (id: string) => void;
   changeWeightToKg: (id: string) => void;
   getQuantityAndUnit: (id: string) => string;
   priceTotalCart: () => number;
   productCartSize: () => number;
+  productCartIsEmpty: () => boolean;
+  emptyCart: () => void;
 };
 
 const StoreContext = createContext({} as Store);
@@ -31,7 +40,7 @@ type Props = {
 
 export const StoreProvider = ({ children }: Props) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [productsCart, setProductsCart] = useState<ProductCart[]>([]);
+  const [productsCart, setProductsCart] = useState<IProductCart[]>([]);
 
   const productsOfferts = products.filter(
     (product) => product.category === 'offerts'
@@ -40,7 +49,11 @@ export const StoreProvider = ({ children }: Props) => {
     (product) => product.category === 'popular'
   );
 
-  const increaseCart = (product: Product) => {
+  const increaseCart = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    product: Product
+  ) => {
+    event.stopPropagation();
     let existProductInCart = productsCart.find((p) => p.id === product.id);
 
     if (existProductInCart) {
@@ -56,7 +69,11 @@ export const StoreProvider = ({ children }: Props) => {
     }
   };
 
-  const decreaseCart = (product: Product) => {
+  const decreaseCart = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    product: Product
+  ) => {
+    event.stopPropagation();
     const productSelect = productsCart.find((p) => p.id === product.id);
 
     if (productSelect?.quantity === 1) {
@@ -125,11 +142,17 @@ export const StoreProvider = ({ children }: Props) => {
     return productsCart.length;
   };
 
+  const productCartIsEmpty = () => productsCart.length === 0;
+
+  const emptyCart = () => {
+    setProductsCart([]);
+  };
   return (
     <StoreContext.Provider
       value={{
         productsPopular,
         productsOfferts,
+        productsCart,
         setProducts,
         increaseCart,
         decreaseCart,
@@ -139,6 +162,8 @@ export const StoreProvider = ({ children }: Props) => {
         getQuantityAndUnit,
         priceTotalCart,
         productCartSize,
+        productCartIsEmpty,
+        emptyCart,
       }}
     >
       {children}
