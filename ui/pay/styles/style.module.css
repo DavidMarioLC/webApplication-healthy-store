@@ -1,0 +1,96 @@
+.form {
+  padding: 1rem;
+}
+
+.title {
+  font-weight: 500;
+  color: hsl(0, 0%, 20%);
+  margin: 0;
+  padding: 1.5rem 0;
+}
+
+.formField {
+  position: relative;
+}
+
+.label {
+  font-size: 0.7rem;
+  position: absolute;
+  left: 1.1rem;
+  top: 0.5rem;
+}
+
+.input {
+  border: 1px transparent solid;
+  border-radius: 5px;
+  width: 100%;
+  padding: 1rem 1rem;
+  background-color: white;
+  color: #333333;
+  border-color: #d9d9d9;
+  margin-bottom: 1rem;
+}
+
+.inputWithLabel {
+  border: 1px transparent solid;
+  border-color: #d9d9d9;
+  border-radius: 5px;
+  width: 100%;
+  padding: 1.5rem 1rem 0.5rem;
+  background-color: white;
+  color: #333333;
+  margin-bottom: 1rem;
+}
+
+.labelInput {
+  font-size: 0.7rem;
+  position: absolute;
+  top: 0.4rem;
+  left: 1rem;
+}
+
+.input:focus,
+.inputWithLabel:focus {
+  outline: none;
+  border: 1px solid #4bbe5e;
+  box-shadow: 0 0 0 1px #4bbe5e;
+}
+
+.select {
+  background-color: #fff;
+  width: 100%;
+  padding: 1.4rem 0.8rem 0.5rem;
+  border: 1px transparent solid;
+  border-color: #d9d9d9;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.select:focus {
+  outline: none;
+  border: 1px solid #4bbe5e;
+  box-shadow: 0 0 0 1px #4bbe5e;
+}
+
+.decoration {
+  position: absolute;
+  background-color: #fff;
+  right: 2px;
+  top: 11px;
+  width: 40px;
+  height: 30px;
+  border-left: 1px solid #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  width: 100%;
+  background-color: #4bbe5e;
+  border-radius: 5px;
+  padding-top: 1.75em;
+  padding-bottom: 1.75em;
+  color: #fff;
+  font-weight: 700;
+}

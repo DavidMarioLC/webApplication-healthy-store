@@ -3,11 +3,14 @@ import Image from 'next/image';
 import style from './styles/header.module.css';
 import { FiShoppingBag, FiMapPin } from 'react-icons/fi';
 import { Wrapper } from './Wrapper';
-import { useStore } from '../context/storeContext';
-import { formatPrice } from '../utils/formatPrice';
+import { useStore } from '../../context/storeContext';
+import { formatPrice } from '../../utils/formatPrice';
+import { useApp } from '../../context/appContext';
 
 export const Header = () => {
   const { productCartSize, priceTotalCart } = useStore();
+  const { changeVisibilityModalCart } = useApp();
+  const openModalCart = () => changeVisibilityModalCart();
   return (
     <header className={style.header}>
       <Wrapper>
@@ -24,14 +27,14 @@ export const Header = () => {
               <FiMapPin className={style.ubicationIcon} />
               <p className={style.ubicationText}> Selecciona tu ubicación</p>
             </button>
-            <div className={style.cart}>
+            <button className={style.cart} onClick={openModalCart}>
               <div className={style.amount}>
                 <FiShoppingBag className={style.amountIcon} />{' '}
                 {productCartSize()}
               </div>
               <div className={style.divider}></div>
               <div className={style.price}>{formatPrice(priceTotalCart())}</div>
-            </div>
+            </button>
           </div>
         </div>
       </Wrapper>
