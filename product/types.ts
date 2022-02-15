@@ -11,6 +11,6 @@ export interface Product {
   category: string;
 }
 
-export interface ProductCart extends Product {
+export interface IProductCart extends Product {
   quantity: number;
 }

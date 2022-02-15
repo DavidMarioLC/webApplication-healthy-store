@@ -1,6 +1,6 @@
 .productCard {
   width: 256px;
-  min-width: 150px;
+  min-width: 200px;
   height: auto;
   cursor: pointer;
 }

@@ -1,12 +1,9 @@
 .productCart {
   display: flex;
-  width: 400px;
+  max-width: 400px;
 
   gap: 1rem;
 }
-/* .productCart > * {
-  outline: 1px solid;
-} */
 
 .productCartImageWrapper {
   border-radius: 16px;
@@ -41,6 +38,16 @@
   font-weight: 400;
   font-size: 14px;
   padding-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.productCartDivider {
+  width: 1px;
+  height: 12px;
+  background: rgb(222, 222, 222);
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .productCartTotal {
@@ -52,7 +59,6 @@
 .productCartFooter {
   display: flex;
   justify-content: space-between;
-
   align-items: center;
 }
 

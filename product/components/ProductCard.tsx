@@ -1,11 +1,11 @@
 import style from '../styles/productCard.module.css';
-
-import Image from 'next/image';
-import { Product } from '../types';
-import { FiMinus, FiPlus } from 'react-icons/fi';
-import { useStore } from '../../context/storeContext';
+import { FiMinus, FiPlus, FiX } from 'react-icons/fi';
 import { formatPrice } from '../../utils/formatPrice';
 import { useState } from 'react';
+import Image from 'next/image';
+import { Product } from '../types';
+import { useStore } from '../../context/storeContext';
+import { useApp } from '../../context/appContext';
 
 type Props = {
   product: Product;
@@ -21,12 +21,19 @@ export const ProductCard = ({ product }: Props) => {
     getQuantityAndUnit,
   } = useStore();
 
+  const {
+    changeVisibilityModalProduct,
+    setProductSelected,
+    visibleModalProduct,
+  } = useApp();
+
   const [toggleUnit, setToggleUnit] = useState('ud');
 
-  const { name, priceUnit, priceKg, weight, description, unit, image, id } =
-    product;
-
-  const changeToggleUnit = (id: string) => {
+  const changeToggleUnit = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id: string
+  ) => {
+    event.stopPropagation();
     if (toggleUnit === 'ud') {
       setToggleUnit('kg');
       return changeWeightToKg(id);
@@ -35,88 +42,106 @@ export const ProductCard = ({ product }: Props) => {
     changeWeightToUnits(id);
   };
 
-  return (
-    <div
-      className={style.productCard}
-      onClick={(e) => {
-        console.log('click');
-      }}
-    >
-      <div className={style.productCardImageWrapper}>
-        <Image
-          className={style.productCardImage}
-          src={image}
-          alt={name}
-          title={name}
-          width={500}
-          height={500}
-        />
-      </div>
-      <div className={style.productCardContent}>
-        <p className={style.productCardName}>{name}</p>
-        <p className={style.productCardWeight}>
-          <span>{weight} g/ud</span>
-          <span className={style.divisor}> </span>
-          <span>{formatPrice(priceKg)}/kg</span>
-        </p>
+  const {
+    name,
+    priceUnit,
+    priceKg,
+    weight,
+    description,
+    unit,
+    image,
+    imageModal,
+    id,
+  } = product;
 
-        <div className={style.productCardBody}>
-          <p>
-            {' '}
-            {toggleUnit === 'ud'
-              ? `${formatPrice(priceUnit)}/und`
-              : `${formatPrice(priceKg)}/kg`}
-          </p>
-          {isInTheCart(id) ? (
-            <div className={style.productCardWeightActions}>
-              <button
-                onClick={() => changeToggleUnit(id)}
-                className={`${style.units__btn} ${
-                  toggleUnit === 'ud' ? `${style.active}` : ``
-                }`}
-              >
-                ud
-              </button>
-              <button
-                onClick={() => changeToggleUnit(id)}
-                className={`${style.units__btn} ${
-                  toggleUnit === 'kg' ? `${style.active}` : ``
-                }`}
-              >
-                kg
-              </button>
-            </div>
-          ) : null}
+  const showModal = () => {
+    if (visibleModalProduct) {
+      setProductSelected(product);
+    } else {
+      setProductSelected(product);
+      changeVisibilityModalProduct();
+    }
+  };
+
+  return (
+    <>
+      <div className={style.productCard} onClick={showModal}>
+        <div className={style.productCardImageWrapper}>
+          <Image
+            className={style.productCardImage}
+            src={image}
+            alt={name}
+            title={name}
+            width={500}
+            height={500}
+          />
         </div>
-        {isInTheCart(id) ? (
-          <div className={style.productCardFooter}>
-            <p className={style.productCardQuantity}>
-              {getQuantityAndUnit(id)}
+        <div className={style.productCardContent}>
+          <p className={style.productCardName}>{name}</p>
+          <p className={style.productCardWeight}>
+            <span>{weight} g/ud</span>
+            <span className={style.divisor}> </span>
+            <span>{formatPrice(priceKg)}/kg</span>
+          </p>
+
+          <div className={style.productCardBody}>
+            <p>
+              {' '}
+              {toggleUnit === 'ud'
+                ? `${formatPrice(priceUnit)}/und`
+                : `${formatPrice(priceKg)}/kg`}
             </p>
-            <div className={style.productCardCartActions}>
-              <button
-                className={style.productCardDecreaseButton}
-                onClick={() => decreaseCart(product)}
-              >
-                <FiMinus />
-              </button>
-              <button
-                className={style.productCardIncreaseButton}
-                onClick={() => increaseCart(product)}
-              >
-                <FiPlus />
-              </button>
-            </div>
+            {isInTheCart(id) ? (
+              <div className={style.productCardWeightActions}>
+                <button
+                  onClick={(event) => changeToggleUnit(event, id)}
+                  className={`${style.units__btn} ${
+                    toggleUnit === 'ud' ? `${style.active}` : ``
+                  }`}
+                >
+                  ud
+                </button>
+                <button
+                  onClick={(event) => changeToggleUnit(event, id)}
+                  className={`${style.units__btn} ${
+                    toggleUnit === 'kg' ? `${style.active}` : ``
+                  }`}
+                >
+                  kg
+                </button>
+              </div>
+            ) : null}
           </div>
-        ) : (
-          <button
-            className={style.button}
-            onClick={() => increaseCart(product)}
-          >
-            Añadir
-          </button>
-        )}
+          {isInTheCart(id) ? (
+            <div className={style.productCardFooter}>
+              <p className={style.productCardQuantity}>
+                {getQuantityAndUnit(id)}
+              </p>
+              <div className={style.productCardCartActions}>
+                <button
+                  className={style.productCardDecreaseButton}
+                  onClick={(event) => decreaseCart(event, product)}
+                >
+                  <FiMinus />
+                </button>
+                <button
+                  className={style.productCardIncreaseButton}
+                  onClick={(event) => increaseCart(event, product)}
+                >
+                  <FiPlus />
+                </button>
+              </div>
+            </div>
+          ) : (
+            <button
+              className={style.button}
+              onClick={(event) => increaseCart(event, product)}
+            >
+              Añadir
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
