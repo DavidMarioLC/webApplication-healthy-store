@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useRef, HTMLAttributes } from 'react';
-import { FiX } from 'react-icons/fi';
+import { FiMinus, FiPlus, FiX } from 'react-icons/fi';
 import Image from 'next/image';
 import ReactDOM from 'react-dom';
 import style from './styles/modalProduct.module.css';
 import PopularProducts from '../../product/screens/PopularProducts';
 import { Product } from '../../product/types';
 import { useApp } from '../../context/appContext';
+import { useStore } from '../../context/storeContext';
+import { formatPrice } from '../../utils/formatPrice';
+
 type Props = {
   visible?: boolean;
   changeVisibility: () => void;
@@ -14,6 +17,8 @@ type Props = {
 
 export const ModalProduct = ({ visible, changeVisibility, product }: Props) => {
   const [isBrowser, setIsBrowser] = useState(false);
+  const { increaseCart, decreaseCart, getQuantityAndUnit, isInTheCart } =
+    useStore();
   const { modalIsActive } = useApp();
 
   const modalRef = useRef<HTMLDivElement>(null);
@@ -28,7 +33,7 @@ export const ModalProduct = ({ visible, changeVisibility, product }: Props) => {
     setIsBrowser(true);
   }, []);
 
-  const { name, imageModal } = product;
+  const { name, imageModal, id, weight, priceKg, priceUnit } = product;
 
   const modalRoot = visible ? (
     <div className={style.overlay}>
@@ -43,9 +48,9 @@ export const ModalProduct = ({ visible, changeVisibility, product }: Props) => {
             </button>
             <h1 className={style.modalProductName}>{name}</h1>
             <div className={style.modalProductWeight}>
-              <p>250 g/ud</p>
+              <p>{weight} g/ud</p>
               <div className={style.modalProductDivisor}></div>
-              <p>6,60 €/kg</p>
+              <p>{formatPrice(priceKg)}/kg</p>
             </div>
             <div className={style.modalProductImage}>
               <Image
@@ -59,10 +64,35 @@ export const ModalProduct = ({ visible, changeVisibility, product }: Props) => {
           </div>
           <div className={style.modalProductBody}>
             <div className={style.modalProductPriceAndButton}>
-              <p className={style.modalProductPrice}>1,60 €/ud</p>
-              <button className={style.modalProductButtonAdd}>
-                Añadir al carrito
-              </button>
+              <p className={style.modalProductPrice}>
+                {formatPrice(priceUnit)}/ud
+              </p>
+              {isInTheCart(id) ? (
+                <div className={style.modalProductActions}>
+                  <button
+                    className={style.modalProductActionsBtn}
+                    onClick={(e) => decreaseCart(e, product)}
+                  >
+                    <FiMinus />
+                  </button>
+                  <span className={style.modalProductQuantity}>
+                    {getQuantityAndUnit(id)}
+                  </span>
+                  <button
+                    className={style.modalProductActionsBtn}
+                    onClick={(e) => increaseCart(e, product)}
+                  >
+                    <FiPlus />
+                  </button>
+                </div>
+              ) : (
+                <button
+                  className={style.modalProductButtonAdd}
+                  onClick={(e) => increaseCart(e, product)}
+                >
+                  Añadir al carrito
+                </button>
+              )}
             </div>
             <p className={style.modalProductDescription}>
               El mango tiene forma ovalada con la piel de color variable de

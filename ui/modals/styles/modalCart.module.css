@@ -57,9 +57,10 @@
 .modalTotal {
   display: flex;
   justify-content: space-between;
-  font-weight: bold;
   padding: 1rem 0;
+  font-weight: bold;
   font-size: 1.2rem;
+  color: rgb(60, 60, 60);
 }
 
 .modalEmptyCartButton {

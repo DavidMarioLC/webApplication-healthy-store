@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import { FiX } from 'react-icons/fi';
 import style from './styles/modalCart.module.css';
 import ReactDOM from 'react-dom';
@@ -14,6 +15,7 @@ type Props = {
 export const ModalCart = ({ visible, changeVisibility }: Props) => {
   const [isBrowser, setIsBrowser] = useState(false);
   const { modalIsActive } = useApp();
+  const router = useRouter();
 
   const { productsCart, priceTotalCart, productCartIsEmpty, emptyCart } =
     useStore();
@@ -24,6 +26,11 @@ export const ModalCart = ({ visible, changeVisibility }: Props) => {
     if (modalRef.current === e.target) {
       changeVisibility();
     }
+  };
+
+  const goToPay = () => {
+    router.push('/pay');
+    changeVisibility();
   };
 
   useEffect(() => {
@@ -65,7 +72,9 @@ export const ModalCart = ({ visible, changeVisibility }: Props) => {
             >
               Vaciar carrito
             </button>
-            <button className={style.modalPayButton}>Ir a pagar</button>
+            <button className={style.modalPayButton} onClick={goToPay}>
+              Ir a pagar
+            </button>
           </div>
         )}
       </div>

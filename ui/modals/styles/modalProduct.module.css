@@ -112,3 +112,31 @@
     height: 300px;
   }
 }
+
+.modalProductActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-radius: 62px;
+  max-width: 400px;
+  height: 48px;
+  overflow: hidden;
+  border: 1px solid rgb(237, 237, 237);
+}
+.modalProductActionsBtn {
+  color: rgb(75, 190, 94);
+  font-size: 1.5rem;
+  width: 25%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.modalProductQuantity {
+  font-weight: bold;
+
+  color: rgb(45, 58, 47);
+}

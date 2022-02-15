@@ -86,7 +86,6 @@ export const ProductCard = ({ product }: Props) => {
 
           <div className={style.productCardBody}>
             <p>
-              {' '}
               {toggleUnit === 'ud'
                 ? `${formatPrice(priceUnit)}/und`
                 : `${formatPrice(priceKg)}/kg`}
