@@ -1,11 +1,11 @@
-import style from '../styles/productCard.module.css';
-import { FiMinus, FiPlus, FiX } from 'react-icons/fi';
-import { formatPrice } from '../../utils/formatPrice';
-import { useState } from 'react';
-import Image from 'next/image';
-import { Product } from '../types';
-import { useStore } from '../../context/storeContext';
-import { useApp } from '../../context/appContext';
+import style from "../styles/productCard.module.css";
+import { FiMinus, FiPlus, FiX } from "react-icons/fi";
+import { formatPrice } from "../../utils/formatPrice";
+import { useState } from "react";
+import Image from "next/image";
+import { Product } from "../types";
+import { useStore } from "../../context/storeContext";
+import { useApp } from "../../context/appContext";
 
 type Props = {
   product: Product;
@@ -27,18 +27,18 @@ export const ProductCard = ({ product }: Props) => {
     visibleModalProduct,
   } = useApp();
 
-  const [toggleUnit, setToggleUnit] = useState('ud');
+  const [toggleUnit, setToggleUnit] = useState("ud");
 
   const changeToggleUnit = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     id: string
   ) => {
     event.stopPropagation();
-    if (toggleUnit === 'ud') {
-      setToggleUnit('kg');
+    if (toggleUnit === "ud") {
+      setToggleUnit("kg");
       return changeWeightToKg(id);
     }
-    setToggleUnit('ud');
+    setToggleUnit("ud");
     changeWeightToUnits(id);
   };
 
@@ -72,8 +72,9 @@ export const ProductCard = ({ product }: Props) => {
             src={image}
             alt={name}
             title={name}
-            width={500}
-            height={500}
+            width="500"
+            height="500"
+            loading="lazy"
           />
         </div>
         <div className={style.productCardContent}>
@@ -86,7 +87,7 @@ export const ProductCard = ({ product }: Props) => {
 
           <div className={style.productCardBody}>
             <p>
-              {toggleUnit === 'ud'
+              {toggleUnit === "ud"
                 ? `${formatPrice(priceUnit)}/und`
                 : `${formatPrice(priceKg)}/kg`}
             </p>
@@ -95,7 +96,7 @@ export const ProductCard = ({ product }: Props) => {
                 <button
                   onClick={(event) => changeToggleUnit(event, id)}
                   className={`${style.units__btn} ${
-                    toggleUnit === 'ud' ? `${style.active}` : ``
+                    toggleUnit === "ud" ? `${style.active}` : ``
                   }`}
                 >
                   ud
@@ -103,7 +104,7 @@ export const ProductCard = ({ product }: Props) => {
                 <button
                   onClick={(event) => changeToggleUnit(event, id)}
                   className={`${style.units__btn} ${
-                    toggleUnit === 'kg' ? `${style.active}` : ``
+                    toggleUnit === "kg" ? `${style.active}` : ``
                   }`}
                 >
                   kg
