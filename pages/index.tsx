@@ -116,7 +116,10 @@ const Home = ({ products }: Props) => {
           content="Health Store es una tiendita donde podras comprar productos saludables. "
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="" />
+        <meta
+          property="og:url"
+          content="https://web-application-healthy-store.vercel.app/"
+        />
         <meta
           property="og:image"
           content="https://raw.githubusercontent.com/DavidMarioLC/webApplication-healthy-store/main/opengraph.webp"
