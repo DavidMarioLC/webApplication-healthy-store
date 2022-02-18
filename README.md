@@ -4,7 +4,7 @@
 
 <h1 align="center">Health Store</h1>
 <div align="center">
-<img width="600px"    src="https://raw.githubusercontent.com/DavidMarioLC/webApplication-healthy-store/main/preview.png" />
+<img width="600px"    src="https://raw.githubusercontent.com/DavidMarioLC/webApplication-healthy-store/main/preview.webp" />
 </div>
 
 <p align="center">Compra todos los productos que deseas en esta tiendita saludable.</p>
