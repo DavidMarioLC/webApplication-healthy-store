@@ -1,6 +1,6 @@
 .heroContent {
   height: 500px;
-  background-image: url('/images/hero.jpg');
+  background-image: url("/images/herostore.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -33,7 +33,7 @@
   overflow: hidden;
 }
 .heroCardText {
-  font-family: 'Patua One', cursive;
+  font-family: "Patua One", cursive;
   font-size: 24px;
   font-weight: 400;
 }

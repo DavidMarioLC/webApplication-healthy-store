@@ -11,6 +11,10 @@
   padding: 1rem 0;
 }
 
+.imageLogo {
+  aspect-ratio: 1/1;
+}
+
 .ubicationAndCard {
   display: flex;
   gap: 1rem;
