@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, HTMLAttributes } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FiMinus, FiPlus, FiX } from "react-icons/fi";
 import Image from "next/image";
 import ReactDOM from "react-dom";

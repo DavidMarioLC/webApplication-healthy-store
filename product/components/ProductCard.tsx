@@ -1,5 +1,5 @@
 import style from "../styles/productCard.module.css";
-import { FiMinus, FiPlus, FiX } from "react-icons/fi";
+import { FiMinus, FiPlus } from "react-icons/fi";
 import { formatPrice } from "../../utils/formatPrice";
 import { useState } from "react";
 import Image from "next/image";

@@ -1,6 +1,6 @@
-import style from '../styles/listProductCard.module.css';
-import { ProductCard } from './ProductCard';
-import { Product, IProductCart } from '../types';
+import style from "../styles/listProductCard.module.css";
+import { ProductCard } from "./ProductCard";
+import { Product } from "../types";
 
 type Props = {
   products: Product[];
