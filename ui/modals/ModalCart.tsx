@@ -1,12 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
-import { FiX } from 'react-icons/fi';
-import style from './styles/modalCart.module.css';
-import ReactDOM from 'react-dom';
-import { ProductCart } from '../../product/components/ProductCart';
-import { useStore } from '../../context/storeContext';
-import { formatPrice } from '../../utils/formatPrice';
-import { useApp } from '../../context/appContext';
+import React, { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { FiX } from "react-icons/fi";
+import style from "./styles/modalCart.module.css";
+import ReactDOM from "react-dom";
+import { ProductCart } from "../../product/components/ProductCart";
+import { useStore } from "../../context/storeContext";
+import { formatPrice } from "../../utils/formatPrice";
+import { useApp } from "../../context/appContext";
+import { motion, AnimatePresence } from "framer-motion";
+
 type Props = {
   visible?: boolean;
   changeVisibility: () => void;
@@ -29,7 +31,7 @@ export const ModalCart = ({ visible, changeVisibility }: Props) => {
   };
 
   const goToPay = () => {
-    router.push('/pay');
+    router.push("/pay");
     changeVisibility();
   };
 
@@ -37,59 +39,70 @@ export const ModalCart = ({ visible, changeVisibility }: Props) => {
     setIsBrowser(true);
   }, []);
 
-  const modalRoot = visible ? (
-    <div className={style.overlay} ref={modalRef} onClick={closeModal}>
-      <div className={style.modalCart}>
-        <div className={style.modalCartHeader}>
-          <p className={style.modalCartTitle}>Carrito</p>
-          <button
-            className={style.modalCartClose}
-            onClick={() => changeVisibility()}
-          >
-            <FiX />
-          </button>
-        </div>
-        <div className={style.modalCartContent}>
-          <div className={style.modalCartListProduct}>
-            {productsCart.map((product) => (
-              <ProductCart key={product.id} product={product} />
-            ))}
-          </div>
-        </div>
-        {productCartIsEmpty() ? (
-          <div className={style.modalCartEmpty}>
-            Todavia no has añadido productos al carrito.
-          </div>
-        ) : (
-          <div className={style.modalFooter}>
-            <div className={style.modalTotal}>
-              <p>Total</p>
-              <p>{formatPrice(priceTotalCart())}</p>
+  const modalRoot = (
+    <AnimatePresence>
+      {visible ? (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className={style.overlay}
+          ref={modalRef}
+          onClick={closeModal}
+        >
+          <div className={style.modalCart}>
+            <div className={style.modalCartHeader}>
+              <p className={style.modalCartTitle}>Carrito</p>
+              <button
+                className={style.modalCartClose}
+                onClick={() => changeVisibility()}
+              >
+                <FiX />
+              </button>
             </div>
-            <button
-              className={style.modalEmptyCartButton}
-              onClick={() => emptyCart()}
-            >
-              Vaciar carrito
-            </button>
-            <button className={style.modalPayButton} onClick={goToPay}>
-              Ir a pagar
-            </button>
+            <div className={style.modalCartContent}>
+              <div className={style.modalCartListProduct}>
+                {productsCart.map((product) => (
+                  <ProductCart key={product.id} product={product} />
+                ))}
+              </div>
+            </div>
+            {productCartIsEmpty() ? (
+              <div className={style.modalCartEmpty}>
+                Todavia no has añadido productos al carrito.
+              </div>
+            ) : (
+              <div className={style.modalFooter}>
+                <div className={style.modalTotal}>
+                  <p>Total</p>
+                  <p>{formatPrice(priceTotalCart())}</p>
+                </div>
+                <button
+                  className={style.modalEmptyCartButton}
+                  onClick={() => emptyCart()}
+                >
+                  Vaciar carrito
+                </button>
+                <button className={style.modalPayButton} onClick={goToPay}>
+                  Ir a pagar
+                </button>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-    </div>
-  ) : null;
-
+        </motion.div>
+      ) : null}
+      ;
+    </AnimatePresence>
+  );
   if (isBrowser) {
     if (modalIsActive) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflowY = 'scroll';
+      document.body.style.overflowY = "scroll";
     }
     return ReactDOM.createPortal(
       modalRoot,
-      document.getElementById('modal-cart')!
+      document.getElementById("modal-cart")!
     );
   } else {
     return null;
